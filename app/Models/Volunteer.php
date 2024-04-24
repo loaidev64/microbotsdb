@@ -6,24 +6,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Project extends Model
+class Volunteer extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'color',
-        'type',
-        'volunteer_id',
+        'level',
     ];
 
     /**
-     * The volunteers that belong to the Project
+     * The projects that belong to the Project
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function volunteers(): BelongsToMany
+    public function projects(): BelongsToMany
     {
-        return $this->belongsToMany(Volunteer::class, 'project_volunteer');
+        return $this->belongsToMany(Project::class, 'project_volunteer');
     }
 }

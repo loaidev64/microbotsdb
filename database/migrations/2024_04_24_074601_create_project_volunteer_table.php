@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Project;
 use App\Models\Volunteer;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,11 +13,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('project_volunteer', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('type');
-            $table->string('color');
+            $table->foreignIdFor(Volunteer::class)
+                ->constrained();
+            $table->foreignIdFor(Project::class)
+                ->constrained();
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('project_volunteer');
     }
 };
